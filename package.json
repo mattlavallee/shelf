@@ -1,0 +1,54 @@
+{
+    "name": "shelf",
+    "version": "1.0.0",
+    "description": "Simple web app to organize and search a local collection of ebooks and audiobooks",
+    "main": "server/index.js",
+    "scripts": {
+        "start": "node server/index.js",
+        "build-server": "tsc",
+        "build-app": "webpack --config webpack.config.js",
+        "copy": "cp app/index.hbs dist/index.hbs",
+        "build": "npm run build-server && npm run build-app && npm run copy",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "engines": {
+        "node": "^8.9.1",
+        "npm": "^5.5.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mattlavallee/shelf.git"
+    },
+    "keywords": [
+        "shelf",
+        "ebook",
+        "audiobook"
+    ],
+    "author": "Matt Lavallee",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mattlavallee/shelf/issues"
+    },
+    "homepage": "https://github.com/mattlavallee/shelf#readme",
+    "dependencies": {
+        "express": "^4.16.2",
+        "express-hbs": "^1.0.4",
+        "body-parser": "^1.18.2"
+    },
+    "devDependencies": {
+        "@types/express": "^4.0.39",
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.0",
+        "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+        "babel-plugin-transform-object-assign": "^6.22.0",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "babel-runtime": "^6.26.0",
+        "file-loader": "^1.1.5",
+        "ts-loader": "^3.1.1",
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.1",
+        "webpack": "^3.8.1"
+    }
+}

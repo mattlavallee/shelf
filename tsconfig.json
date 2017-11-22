@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "noUnusedLocals": true,
+        "suppressImplicitAnyIndexErrors": false,
+        "outDir": "server/",
+        "rootDir": "src/"
+    },
+    "exclude": ["node_modules", "app"]
+}
