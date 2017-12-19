@@ -9,8 +9,8 @@ import {ebookLocation, tokenizeBookFormat, ebookFormat} from '../configs/file-lo
 export function processEbooks(): Book[] {
   const files = fs.readdirSync(ebookLocation);
   let ebooks: Book[] = [];
+  const tokenizedStats = tokenizeBookFormat(ebookFormat);
   forEach(files, (file) => {
-    const tokenizedStats = tokenizeBookFormat(ebookFormat);
     const filePieces: string[] = file.split('.');
     if(tokenizedStats.token === null) {
       ebooks.push(new Book(

@@ -7,6 +7,7 @@ const path = require('path');
 import {Book} from './models/book';
 
 import {processEbooks} from './parsers/ebook-parser';
+import {processAudiobooks} from './parsers/audiobook-parser';
 
 var app = express();
 
@@ -26,7 +27,8 @@ app.use(express.static(path.join(__dirname, '../bower_components')));
 
 app.get('/', function(req, res) {
   const ebooks: Book[] = processEbooks();
-  res.render('index', {books: JSON.stringify(ebooks)});
+  const audiobooks: Book[] = processAudiobooks();
+  res.render('index', {books: JSON.stringify(ebooks.concat(audiobooks))});
 });
 
 app.listen(8000, () => console.log('App listening on port 8000!'))
