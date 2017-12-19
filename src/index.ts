@@ -4,6 +4,9 @@ import * as express from 'express';
 const bodyParser = require('body-parser');
 const hbs = require('express-hbs');
 const path = require('path');
+import {Book} from './models/book';
+
+import {processEbooks} from './parsers/ebook-parser';
 
 var app = express();
 
@@ -22,7 +25,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(path.join(__dirname, '../bower_components')));
 
 app.get('/', function(req, res) {
-  res.render('index');
+  const ebooks: Book[] = processEbooks();
+  res.render('index', {books: JSON.stringify(ebooks)});
 });
 
-app.listen(8000, () => console.log('Example app listening on port 8000!'))
+app.listen(8000, () => console.log('App listening on port 8000!'))
