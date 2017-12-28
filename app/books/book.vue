@@ -17,5 +17,7 @@ export default Vue.extend({
 .shelf-book {
   border: 1px solid #9d9d9d;
   margin: 5px;
+
+  flex: 1 1 150px;
 }
 </style>
