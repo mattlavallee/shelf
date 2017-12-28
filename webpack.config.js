@@ -11,17 +11,28 @@ module.exports = {
     },
     module: {
         loaders: [
+            // vue-loader: compile vue templates
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    loaders: {
+                        js: 'babel-loader',
+                    },
+                    esModule: true,
+                },
+            },
             // ts-loader: convert typescript (es6) to javascript (es6),
             // babel-loader: converts javascript (es6) to javascript (es5)
             {
                 test: /\.(ts|tsx)?$/,
-                use: [
-                    { loader: 'babel-loader' },
-                    {
-                        loader: 'ts-loader',
-                        options: { configFile: 'tsconfig.app.json' }
+                use: [{
+                    loader: 'ts-loader',
+                    options: {
+                        configFile: 'tsconfig.app.json',
+                        appendTsSuffixTo: [/\.vue$/],
                     },
-                ],
+                }, ],
                 exclude: /node_modules/,
             },
             // babel-loader for pure javascript (es6) => javascript (es5)
@@ -33,5 +44,10 @@ module.exports = {
         ]
     },
     externals: {},
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.js'
+        }
+    },
     plugins: [],
 };
