@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(express.static(path.join(__dirname, '../bower_components')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 app.get('/', function(req, res) {
   const ebooks: Book[] = processEbooks();

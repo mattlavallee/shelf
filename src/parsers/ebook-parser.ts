@@ -4,7 +4,8 @@ const fs = require('fs');
 import {forEach} from 'lodash';
 import {Book} from '../models/book';
 import {BookTypes} from '../models/book-types';
-import {ebookLocation, tokenizeBookFormat, ebookFormat} from '../configs/file-locations';
+import {ebookLocation, ebookFormat} from '../configs/file-locations';
+import {tokenizeBookFormat} from '../configs/tokenizer';
 
 export function processEbooks(): Book[] {
   const files = fs.readdirSync(ebookLocation);

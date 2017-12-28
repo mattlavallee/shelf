@@ -4,14 +4,15 @@ const glob = require('glob');
 import {forEach} from 'lodash';
 import {Book} from '../models/book';
 import {BookTypes} from '../models/book-types';
-import {audiobookLocation, tokenizeBookFormat, audiobookFormat} from '../configs/file-locations';
+import {audiobookLocation, audiobookFormat} from '../configs/file-locations';
+import {tokenizeBookFormat} from '../configs/tokenizer';
 
 export function processAudiobooks(): Book[] {
   let regexFormat = audiobookFormat.replace('{author}', '*').replace('{title}', '*');
   const files = glob.sync(audiobookLocation + regexFormat);
   let audiobooks: Book[] = [];
   const tokenizedStats = tokenizeBookFormat(audiobookFormat);
-  const format = '.mp3';
+  const format = 'MP3';
   forEach(files, (file) => {
     const sanitizedFile = file.replace(audiobookLocation, '');
     if (tokenizedStats.token === null) {
