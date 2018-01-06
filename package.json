@@ -4,6 +4,7 @@
     "description": "Simple web app to organize and search a local collection of ebooks and audiobooks",
     "main": "server/index.js",
     "scripts": {
+        "clean": "rm -rf ./dist",
         "start": "node server/index.js",
         "build-server": "tsc",
         "build-app": "webpack --config webpack.config.js",
@@ -11,7 +12,7 @@
         "copy": "npm run copy-index && npm run copy-images",
         "copy-images": "cp -r images dist/images",
         "copy-index": "cp app/index.hbs dist/index.hbs",
-        "build": "npm run build-css && npm run build-server && npm run build-app && npm run copy",
+        "build": "npm run clean && npm run build-css && npm run build-server && npm run build-app && npm run copy",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "engines": {
