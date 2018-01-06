@@ -1,9 +1,11 @@
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="./shelf.css" />
     <script src="./shelf.js"></script>
   </head>
   <body>
     <div id="shelf-app">
+      <app-header></app-header>
       <book-listing :listing="{{books}}"></book-listing>
     </div>
   </body>

@@ -24,6 +24,8 @@ export default Vue.extend({
 
 <style>
   .shelf-listing {
+    position: relative;
+    margin: 0 5%;
     display: flex;
     flex-wrap: wrap;
   }
