@@ -36,6 +36,7 @@ export default Vue.extend({
   padding: 5px;
 
   text-align: center;
+  background-color: #fefefe;
 }
 
 .shelf-book img {

@@ -2,16 +2,22 @@
   <div class="shelf-header">
     <img :src="shelfImg" width="50" height="50" />
     <h1>shelf</h1>
+    <shelf-search></shelf-search>
   </div>
 </template>
 
 <script>
 const Vue = require('vue');
+import Search from './search.vue';
+
 export default Vue.extend({
   data: function() {
     return {
       shelfImg: './images/shelf.png',
     };
+  },
+  components: {
+    'shelf-search': Search,
   },
 });
 </script>
