@@ -1,9 +1,9 @@
 <template>
   <div class="shelf-search">
-    <input type="text" placeholder="Search..." />
+    <input type="text" placeholder="Search..." v-model="searchText" />
     <div class="type-filters">
-      <input type="checkbox" value="ebooks" checked /> <span>Ebooks</span><br />
-      <input type="checkbox" value="audiobooks" checked /> <span>Audiobooks</span>
+      <input type="checkbox" value="ebooks" v-model="includeEbooks" /> <span>Ebooks</span><br />
+      <input type="checkbox" value="audiobooks" v-model="includeAudiobooks" /> <span>Audiobooks</span>
     </div>
   </div>
 </template>
@@ -11,7 +11,15 @@
 <script>
 const Vue = require('vue');
 
-export default Vue.extend({});
+export default Vue.extend({
+  data: function() {
+    return {
+      searchText: this.$store.state.filters.search,
+      includeEbooks: this.$store.state.filters.includeEbooks,
+      includeAudiobooks: this.$store.state.filters.includeAudiobooks,
+    };
+  },
+});
 </script>
 
 <style>
