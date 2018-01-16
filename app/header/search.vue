@@ -12,12 +12,31 @@
 const Vue = require('vue');
 
 export default Vue.extend({
-  data: function() {
-    return {
-      searchText: this.$store.state.filters.search,
-      includeEbooks: this.$store.state.filters.includeEbooks,
-      includeAudiobooks: this.$store.state.filters.includeAudiobooks,
-    };
+  computed: {
+    searchText: {
+      get() {
+        return this.$store.getters.getSearchFilter;
+      },
+      set(val) {
+        this.$store.commit('updateFilter', {key:'search', value: val});
+      },
+    },
+    includeEbooks: {
+      get() {
+        return this.$store.getters.shouldIncludeEbooks;
+      },
+      set(val) {
+        this.$store.commit('updateFilter', {key:'includeEbooks', value: val});
+      },
+    },
+    includeAudiobooks: {
+      get() {
+        return this.$store.getters.shouldIncludeAudiobooks;
+      },
+      set(val) {
+        this.$store.commit('updateFilter', {key:'includeAudiobooks', value: val});
+      },
+    },
   },
 });
 </script>
