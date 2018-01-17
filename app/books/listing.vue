@@ -38,7 +38,12 @@ export default Vue.extend({
         return includes(bookTitle, searchQuery) ||
                includes(bookAuthor, searchQuery);
       });
-      return sortBy(filteredList, ['author', 'title']);
+
+      let sortOrder = ['author', 'title'];
+      if (this.$store.getters.sortType === 'title') {
+        sortOrder.reverse();
+      }
+      return sortBy(filteredList, sortOrder);
     }
   },
   components: {
