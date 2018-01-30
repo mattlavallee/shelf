@@ -1,6 +1,7 @@
 'use strict';
 
 const glob = require('glob');
+const path = require('path');
 import {forEach} from 'lodash';
 import {Book} from '../models/book';
 import {BookTypes} from '../models/book-types';
@@ -21,6 +22,7 @@ export function processAudiobooks(): Book[] {
         tokenizedStats.title < 0 ? null : sanitizedFile,
         BookTypes.AUDIOBOOK,
         format,
+        path.join(audiobookLocation, file),
       ));
     } else {
       const audioPieces: string[] = sanitizedFile.split(tokenizedStats.token);
@@ -30,6 +32,7 @@ export function processAudiobooks(): Book[] {
         authorFirst ? audioPieces[1] : audioPieces[0],
         BookTypes.AUDIOBOOK,
         format,
+        path.join(audiobookLocation, file),
       ));
     }
   });

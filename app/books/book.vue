@@ -7,14 +7,29 @@
       <div class="shelf-book-title">{{data.title}}</div>
       <div class="shelf-book-author">{{data.author}}</div>
       <div class="shelf-book-format">{{data.format}}</div>
+      <div>
+        <a v-bind:href="'./download/' + filePath + '?name=' + downloadFileName" 
+           target="_blank">Download</a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 const Vue = require('vue');
+import { Base64 } from 'js-base64';
+
 export default Vue.extend({
   props: ['data'],
+  computed: {
+    filePath: function() {
+      return Base64.encode(this.data.path);
+    },
+    downloadFileName: function() {
+      return Base64.encode(this.data.title + ' - ' + this.data.author + 
+        (this.data.format === 'MP3' ? '' : '.' + this.data.format.toLowerCase()));
+    }
+  },
   methods: {
     defaultImage: function() {
       return this.data.format === "MP3" ?

@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const path = require('path');
 import {forEach} from 'lodash';
 import {Book} from '../models/book';
 import {BookTypes} from '../models/book-types';
@@ -19,6 +20,7 @@ export function processEbooks(): Book[] {
         tokenizedStats.title < 0 ? null : filePieces[0],
         BookTypes.EBOOK,
         filePieces[1],
+        path.join(ebookLocation, file),
       ));
     } else {
       const fileNamePieces: string[] = filePieces[0].split(tokenizedStats.token);
@@ -28,6 +30,7 @@ export function processEbooks(): Book[] {
         authorFirst ? fileNamePieces[1] : fileNamePieces[0],
         BookTypes.EBOOK,
         filePieces[1],
+        path.join(ebookLocation, file),
       ));
     }
   });

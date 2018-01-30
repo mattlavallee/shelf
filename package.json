@@ -36,10 +36,13 @@
     "homepage": "https://github.com/mattlavallee/shelf#readme",
     "dependencies": {
         "@types/lodash": "^4.14.91",
+        "@types/js-base64": "^2.3.1",
         "express": "^4.16.2",
+        "express-easy-zip": "^1.1.4",
         "express-hbs": "^1.0.4",
         "body-parser": "^1.18.2",
         "glob": "^7.1.2",
+        "js-base64": "^2.4.3",
         "lodash": "^4.17.4",
         "vue": "^2.5.13",
         "vuex": "^3.0.1"
