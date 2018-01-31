@@ -1,16 +1,16 @@
 <template>
   <div class="shelf-book">
-    <div>
-      <img :src="defaultImage()" />
+    <div class="shelf-book-display">
+      <i v-bind:class="'display fa ' + imageClass()"></i>
+      <a v-bind:href="'./download/' + filePath + '?name=' + downloadFileName" 
+           target="_blank" title="Download">
+        <i class="fa fa-download shelf-book-download"></i>
+      </a>
     </div>
     <div class="shelf-book-content">
       <div class="shelf-book-title">{{data.title}}</div>
       <div class="shelf-book-author">{{data.author}}</div>
       <div class="shelf-book-format">{{data.format}}</div>
-      <div>
-        <a v-bind:href="'./download/' + filePath + '?name=' + downloadFileName" 
-           target="_blank">Download</a>
-      </div>
     </div>
   </div>
 </template>
@@ -31,9 +31,9 @@ export default Vue.extend({
     }
   },
   methods: {
-    defaultImage: function() {
+    imageClass: function() {
       return this.data.format === "MP3" ?
-        "./images/audiobook.png" : "./images/ebook.png";
+        "fa-tablet" : "fa-headphones";
     },
   },
 });
@@ -54,8 +54,42 @@ export default Vue.extend({
   background-color: #fefefe;
 }
 
-.shelf-book img {
+.shelf-book .shelf-book-display {
+  position: relative;
+}
+
+.shelf-book .shelf-book-display a:link {
+  color: #000;
+}
+.shelf-book .shelf-book-display a:visited {
+  color: #000;
+}
+.shelf-book .shelf-book-display a:hover {
+  color: #000;
+}
+.shelf-book .shelf-book-display a:active {
+  color: #000;
+}
+
+.shelf-book .shelf-book-display i.display {
+  font-size: 100px;
   padding-left: 7px;
+}
+
+.shelf-book .shelf-book-download {
+  display: none;
+  font-size: 90px;
+  top: 5px;
+  padding-left: 23px;
+  position: absolute;
+}
+
+.shelf-book .shelf-book-display:hover i.display {
+  opacity: 0.2;
+}
+
+.shelf-book .shelf-book-display:hover .shelf-book-download {
+  display: block;
 }
 
 .shelf-book .shelf-book-title {
