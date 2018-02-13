@@ -38,6 +38,7 @@
     "dependencies": {
         "@types/js-base64": "^2.3.1",
         "@types/lodash": "^4.14.91",
+        "axios": "^0.17.1",
         "body-parser": "^1.18.2",
         "express": "^4.16.2",
         "express-easy-zip": "^1.1.4",
