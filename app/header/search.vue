@@ -1,10 +1,18 @@
 <template>
   <div class="shelf-search">
-    <input type="text" placeholder="Search..." v-model="searchText" />
-    <div class="type-filters">
-      <input type="checkbox" value="ebooks" v-model="includeEbooks" /> <span>Ebooks</span><br />
-      <input type="checkbox" value="audiobooks" v-model="includeAudiobooks" /> <span>Audiobooks</span>
-    </div>
+    <v-layout row>
+      <v-text-field v-model="searchText" prepend-icon="fa-search" @input="onSearchChange"></v-text-field>
+      <v-flex xs6 sm3>
+        <v-btn-toggle multiple v-model="toggleFilters" active-class="btn-primary">
+          <v-btn flat value="includeEbooks" title="Filter Ebooks">
+            <v-icon>fa-tablet</v-icon>
+          </v-btn>
+          <v-btn flat value="includeAudiobooks" title="Filter Audiobooks">
+            <v-icon>fa-headphones</v-icon>
+          </v-btn>
+        </v-btn-toggle>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
@@ -21,57 +29,44 @@ export default Vue.extend({
         this.$store.commit('updateFilter', {key:'search', value: val});
       },
     },
-    includeEbooks: {
+    toggleFilters: {
       get() {
-        return this.$store.getters.shouldIncludeEbooks;
+        return this.$store.getters.getFilters;
       },
-      set(val) {
-        this.$store.commit('updateFilter', {key:'includeEbooks', value: val});
-      },
-    },
-    includeAudiobooks: {
-      get() {
-        return this.$store.getters.shouldIncludeAudiobooks;
-      },
-      set(val) {
-        this.$store.commit('updateFilter', {key:'includeAudiobooks', value: val});
-      },
+       set(val) {
+         this.$store.commit('updateFilter', {key: 'filters', value: val});
+       }
+    }
+  },
+  methods: {
+    onSearchChange: function(val) {
+      this.$store.commit('updateFilter', {key: 'search', value: val});
     },
   },
 });
 </script>
 
 <style>
-.shelf-search {
-  display: inline-block;
+.shelf-search .flex {
   position: relative;
-  margin-left: 15px;
-  top: -3px;
-  line-height: initial;
-  vertical-align: text-bottom;
+  height: 50%;
+  top: 18px;
+  padding-left: 10px;
 }
 
-.shelf-search input[type="text"] {
-  width: 350px;
-  height: 30px;
-  font-size: 14pt;
-  border-radius: 5px;
-  border: 1px solid #fefefe;
-  padding: 5px;
+.shelf-search button {
+  padding: 2px 8px;
 }
 
-.shelf-search .type-filters {
-  display: inline-block;
-  font-size: 8pt;
-  vertical-align: middle;
+.shelf-search button.btn--flat {
+  background-color: #b3d4fc !important;
+  border-color: #b3d4fc !important;
+  color: #000;
 }
 
-.shelf-search .type-filters input {
-  margin-right: 0;
-}
-
-.shelf-search .type-filters span {
-  position: relative;
-  top: -3px;
+.shelf-search button.btn--active {
+  background-color: #2196f3 !important;
+  border-color: #2196f3 !important;
+  color: #fff !important;
 }
 </style>

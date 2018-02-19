@@ -1,6 +1,8 @@
 <template>
   <div class="shelf-sort">
-    <input type="button" v-model="sortType" v-on:click="updateSort" />
+    <v-layout row>
+      <v-btn color="info" v-on:click="updateSort">{{sortType}}</v-btn>
+    </v-layout>
   </div>
 </template>
 
@@ -25,25 +27,14 @@ export default Vue.extend({
 </script>
 
 <style>
-.shelf-sort {
-  display: inline-block;
+.shelf-sort .layout {
   position: relative;
-  float: right;
-  top: 13px;
-  line-height: initial;
+  padding-left: 5px;
+  height: 24px;
+  top: 18px;
 }
 
-.shelf-sort input {
-  height: 35px;
-  width: 125px;
-  text-align: center;
-  font-size: 16px;
-  line-height: 16px;
-  border: 1px solid #999999;
-  border-radius: 4px;
-  background-color: #dddddd;
-  touch-action: manipulation;
-  cursor: pointer;
-  vertical-align: bottom;
+.shelf-sort .layout button {
+  width: 156px;
 }
 </style>

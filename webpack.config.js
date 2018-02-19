@@ -40,8 +40,13 @@ module.exports = {
                 test: /\.(js?)$/,
                 loaders: ['babel'],
                 exclude: /node_modules/,
-            }
-        ]
+            },
+            // css-loader for vuetify plugin
+            {
+                test: /\.(css?)$/,
+                use: ['style-loader', 'css-loader'],
+            },
+        ],
     },
     externals: {},
     resolve: {

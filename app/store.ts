@@ -9,15 +9,13 @@ export default new Vuex.Store({
   state: {
     filters: {
       search: '',
-      includeAudiobooks: true,
-      includeEbooks: true,
+      filters: ['includeEbooks', 'includeAudiobooks'],
     },
     sortType: 'author',
   },
   getters: {
     getSearchFilter: (state: any) => state.filters.search,
-    shouldIncludeAudiobooks: (state: any) => state.filters.includeAudiobooks,
-    shouldIncludeEbooks: (state: any) => state.filters.includeEbooks,
+    getFilters: (state: any) => state.filters.filters,
     sortType: (state: any) => state.sortType,
   },
   mutations: {

@@ -1,6 +1,10 @@
 <template>
   <div class="shelf-listing">
-    <book v-for="entry in bookListing" :key="entry.id" :data="entry"></book>
+    <v-container fluid>
+      <v-layout row wrap>
+        <book v-for="entry in bookListing" :key="entry.id" :data="entry"></book>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -18,10 +22,12 @@ export default Vue.extend({
   props: ['listing'],
   computed: {
     bookListing: function() {
+      const shouldIncludeEbooks = this.$store.getters.getFilters.includes('includeEbooks');
+      const shouldIncludeAudiobooks = this.$store.getters.getFilters.includes('includeAudiobooks');
       let filteredList = filter(this.listing, (book) => {
         //filter out results based on ebook vs audiobook filters
-        if ((book.type === types.ebook && !this.$store.getters.shouldIncludeEbooks) ||
-          (book.type === types.audiobook && !this.$store.getters.shouldIncludeAudiobooks)) {
+        if ((book.type === types.ebook && !shouldIncludeEbooks) ||
+          (book.type === types.audiobook && !shouldIncludeAudiobooks)) {
             return false;
         }
 
@@ -53,10 +59,7 @@ export default Vue.extend({
 </script>
 
 <style>
-  .shelf-listing {
-    position: relative;
-    margin: 0 5%;
-    display: flex;
-    flex-wrap: wrap;
+  .shelf-listing .layout {
+    justify-content: center;
   }
 </style>

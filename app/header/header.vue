@@ -1,9 +1,15 @@
 <template>
   <div class="shelf-header">
-    <img :src="shelfImg" width="50" height="50" />
-    <h1>shelf</h1>
-    <shelf-search></shelf-search>
-    <shelf-sort></shelf-sort>
+    <v-toolbar>
+      <v-toolbar-title>
+        <img :src="shelfImg" width="50" height="50" /> <h1>shelf</h1>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <shelf-search></shelf-search>
+        <shelf-sort></shelf-sort>
+      </v-toolbar-items>
+    </v-toolbar>
   </div>
 </template>
 
@@ -26,19 +32,10 @@ export default Vue.extend({
 </script>
 
 <style>
-.shelf-header {
-  height: 60px;
-  background-color: #dee1d8;
-  border-bottom: 1px solid #591902;
-  padding-left: 5%;
-  padding-right: 5%;
-  line-height: 60px;
-}
-
-h1 {
-  color: #40371e;
-  display: inline;
+.shelf-header h1 {
+  display: inline-block;
   position: relative;
-  top: -10px;
+  vertical-align: top;
+  top: 5px;
 }
 </style>

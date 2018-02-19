@@ -5,8 +5,12 @@
   </head>
   <body>
     <div id="shelf-app">
-      <app-header></app-header>
-      <book-listing :listing="{{books}}"></book-listing>
+      <v-app light>
+        <v-content>
+          <app-header></app-header>
+          <book-listing :listing="{{books}}"></book-listing>
+        </v-content>
+      </v-app>
     </div>
   </body>
 </html>
