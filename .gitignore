@@ -12,3 +12,4 @@ node_modules/
 # Other Files and directories
 dist/
 server/
+src/configs/api-key.ts

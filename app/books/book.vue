@@ -1,7 +1,7 @@
 <template>
   <div class="shelf-book">
     <v-flex>
-      <v-card width="185" height="250">
+      <v-card width="185" height="250" :hover="showHover">
         <v-card-media height="100px">
           <v-icon>{{imageClass()}}</v-icon>
         </v-card-media>
@@ -15,7 +15,23 @@
         <v-card-actions>
           <v-btn flat color="orange"
             @click="downloadFile">Download</v-btn>
-          <v-btn flat color="orange">Details</v-btn>
+          <v-dialog v-model="dialogOpen" width="600px">
+            <v-btn flat color="orange" slot="activator" @click.native="getDescription">Details</v-btn>
+            <v-card>
+              <v-card-title>
+                <div class="headline">{{data.title}} by {{data.author}}</div>
+              </v-card-title>
+              <v-card-text>
+                <div v-if="!description" class="progress-wrapper">
+                  <v-progress-circular indeterminate 
+                                       :size="50" 
+                                       color="primary"></v-progress-circular>
+                </div>
+                <img :src="image" class="descr-img" />
+                <span v-html="description" class="descr-descr"></span>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -25,9 +41,18 @@
 <script>
 const Vue = require('vue');
 import { Base64 } from 'js-base64';
+import axios from 'axios';
 
 export default Vue.extend({
   props: ['data'],
+  data: function() {
+    return {
+      showHover: true,
+      dialogOpen: false,
+      image: null,
+      description: null,
+    };
+  },
   computed: {
     filePath: function() {
       return Base64.encode(this.data.path);
@@ -35,6 +60,12 @@ export default Vue.extend({
     downloadFileName: function() {
       return Base64.encode(this.data.title + ' - ' + this.data.author + 
         (this.data.format === 'MP3' ? '' : '.' + this.data.format.toLowerCase()));
+    },
+    encodedTitle: function() {
+      return Base64.encode(this.data.title);
+    },
+    encodedAuthor: function() {
+      return Base64.encode(this.data.author);
     }
   },
   methods: {
@@ -44,6 +75,17 @@ export default Vue.extend({
     },
     downloadFile: function() {
       window.open('./download/' + this.filePath + '?name=' + this.downloadFileName);
+    },
+    getDescription: function() {
+      if (this.description && this.image) {
+        return;
+      }
+
+      axios.get('./book-details/' + this.encodedTitle + '/' + this.encodedAuthor)
+        .then((result) => {
+          this.image = result.data.imgUrl;
+          this.description = result.data.description;
+        });
     },
   },
 });
@@ -83,5 +125,29 @@ export default Vue.extend({
 }
 .shelf-book .card__actions button {
   min-width: 82px !important;
+}
+
+.shelf-book .headline {
+  text-align: center;
+  width: 100%;
+}
+
+.dialog .card__text {
+  display: flex;
+}
+
+.dialog .descr-img{
+  flex: 0 1 0;
+  margin-right: 10px;
+  height: 160px;
+}
+
+.dialog .descr-descr {
+  flex: 1 1 0;
+}
+
+.dialog .progress-wrapper {
+  text-align: center;
+  width: 100%;
 }
 </style>

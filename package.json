@@ -36,6 +36,7 @@
     },
     "homepage": "https://github.com/mattlavallee/shelf#readme",
     "dependencies": {
+        "@types/axios": "^0.14.0",
         "@types/js-base64": "^2.3.1",
         "@types/lodash": "^4.14.91",
         "axios": "^0.17.1",
@@ -49,7 +50,9 @@
         "lodash": "^4.17.4",
         "vue": "^2.5.13",
         "vuetify": "^1.0.1",
-        "vuex": "^3.0.1"
+        "vuex": "^3.0.1",
+        "xml-reader": "^2.4.3",
+        "xml-query": "^1.4.0"
     },
     "devDependencies": {
         "@types/express": "^4.0.39",
